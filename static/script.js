@@ -30,56 +30,30 @@ togglePassword.addEventListener("click", function () {
     }
 
 });
+
+
 /* =========================
-   RESET WHEN INPUT IS EMPTY
+   PASSWORD STRENGTH CHECK
 ========================= */
 
-passwordInput.addEventListener("input", function () {
-
-    if (passwordInput.value.length === 0) {
-
-        resetChecker();
-
-    }
-
-});
 passwordInput.addEventListener("input", async function () {
 
     const password = passwordInput.value;
 
-    // Empty input → reset everything
+
+    /* Empty input → reset */
+
     if (password.length === 0) {
+
         resetChecker();
+
         return;
+
     }
 
-    // Update requirements
-    updateRequirement(
-        "length",
-        password.length >= 8
-    );
 
-    updateRequirement(
-        "uppercase",
-        /[A-Z]/.test(password)
-    );
+    /* Send password to Flask */
 
-    updateRequirement(
-        "lowercase",
-        /[a-z]/.test(password)
-    );
-
-    updateRequirement(
-        "number",
-        /[0-9]/.test(password)
-    );
-
-    updateRequirement(
-        "special",
-        /[^A-Za-z0-9]/.test(password)
-    );
-
-    // Check password strength
     try {
 
         const response = await fetch("/check-password", {
@@ -96,12 +70,17 @@ passwordInput.addEventListener("input", async function () {
 
         });
 
+
         const data = await response.json();
+
+
+        /* Update strength */
 
         updateStrength(
             data.score,
             data.strength
         );
+
 
     } catch (error) {
 
@@ -111,26 +90,6 @@ passwordInput.addEventListener("input", async function () {
 
 });
 
-/* =========================
-   REQUIREMENT FUNCTION
-========================= */
-
-function updateRequirement(id, valid) {
-
-    const element = document.getElementById(id);
-
-    if (valid) {
-
-        element.classList.add("valid");
-
-    } else {
-
-        element.classList.remove("valid");
-
-    }
-
-}
-
 
 /* =========================
    STRENGTH UI
@@ -138,12 +97,20 @@ function updateRequirement(id, valid) {
 
 function updateStrength(score, strength) {
 
-    let percentage = score * 20;
+    const percentage = score * 20;
+
+
+    /* Update progress bar */
 
     strengthFill.style.width = percentage + "%";
 
+
+    /* Update strength text */
+
     strengthText.textContent = strength;
 
+
+    /* Weak */
 
     if (strength === "Weak") {
 
@@ -158,6 +125,9 @@ function updateStrength(score, strength) {
 
     }
 
+
+    /* Medium */
+
     else if (strength === "Medium") {
 
         strengthText.style.color = "#ff8c00";
@@ -170,6 +140,9 @@ function updateStrength(score, strength) {
         strengthMessage.style.color = "#ff8c00";
 
     }
+
+
+    /* Strong */
 
     else {
 
@@ -197,111 +170,18 @@ function resetChecker() {
 
     strengthText.style.color = "#777";
 
+
     strengthFill.style.width = "0%";
+
 
     strengthMessage.textContent =
         "Enter a password to begin the security check.";
 
     strengthMessage.style.color = "#777";
 
-
-    const requirements = document.querySelectorAll(".requirement");
-
-    requirements.forEach(function (element) {
-
-        element.classList.remove("valid");
-
-    });
-
 }
-/* =========================
-   PASSWORD REQUIREMENTS INFO
-========================= */
-
-const infoButton = document.getElementById("infoButton");
-
-const requirements = document.getElementById("requirements");
-infoButton.addEventListener("click", function () {
-
-    requirements.classList.toggle("hidden");
-
-});
 
 
-let passwordChecked = false;
-
-passwordInput.addEventListener("input", async function () {
-
-    const password = passwordInput.value;
-
-    // If box is completely empty, return to initial state
-    if (password.length === 0) {
-        passwordChecked = false;
-        resetChecker();
-        return;
-    }
-
-    // Don't check dynamically until the user has clicked
-    // "Check Password" at least once
-    if (!passwordChecked) {
-        return;
-    }
-
-    // Update requirements dynamically
-    updateRequirement(
-        "length",
-        password.length >= 8
-    );
-
-    updateRequirement(
-        "uppercase",
-        /[A-Z]/.test(password)
-    );
-
-    updateRequirement(
-        "lowercase",
-        /[a-z]/.test(password)
-    );
-
-    updateRequirement(
-        "number",
-        /[0-9]/.test(password)
-    );
-
-    updateRequirement(
-        "special",
-        /[^A-Za-z0-9]/.test(password)
-    );
-
-    // Check updated password
-    try {
-
-        const response = await fetch("/check-password", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                password: password
-            })
-
-        });
-
-        const data = await response.json();
-
-        updateStrength(
-            data.score,
-            data.strength
-        );
-
-    } catch (error) {
-        console.error("Error:", error);
-    }
-
-});
 /* =========================
    THEME MENU
 ========================= */
@@ -313,7 +193,9 @@ const themeMenu = document.getElementById("themeMenu");
 const themeOptions = document.querySelectorAll(".theme-option");
 
 
-/* Open / close menu */
+/* =========================
+   OPEN / CLOSE THEME MENU
+========================= */
 
 themeButton.addEventListener("click", function (event) {
 
@@ -324,7 +206,7 @@ themeButton.addEventListener("click", function (event) {
 });
 
 
-/* Prevent menu click from reaching document */
+/* Prevent menu click from closing */
 
 themeMenu.addEventListener("click", function (event) {
 
@@ -333,7 +215,7 @@ themeMenu.addEventListener("click", function (event) {
 });
 
 
-/* Close when clicking outside */
+/* Close menu when clicking outside */
 
 document.addEventListener("click", function () {
 
@@ -357,7 +239,7 @@ function applyTheme(theme) {
     document.body.classList.add(theme);
 
 
-    /* Change main icon */
+    /* Change theme button icon */
 
     if (theme === "dark") {
 
@@ -378,11 +260,12 @@ function applyTheme(theme) {
     }
 
 
-    /* Mark selected option */
+    /* Mark selected theme */
 
     themeOptions.forEach(function (option) {
 
         option.classList.remove("active");
+
 
         if (option.dataset.theme === theme) {
 
@@ -391,6 +274,7 @@ function applyTheme(theme) {
         }
 
     });
+
 }
 
 
@@ -404,7 +288,9 @@ themeOptions.forEach(function (option) {
 
         const selectedTheme = option.dataset.theme;
 
+
         applyTheme(selectedTheme);
+
 
         themeMenu.classList.remove("show");
 
