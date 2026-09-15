@@ -697,7 +697,7 @@ footer {
    MOBILE
 ========================= */
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
 
     .container {
         padding: 25px 15px;
@@ -714,7 +714,7 @@ footer {
     .logo {
         font-size: 24px;
     }
-}
+} */
 /* =========================
    TOP BAR
 ========================= */
