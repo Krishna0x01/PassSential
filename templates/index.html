@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Passsential | Password Security</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+    </div>
+
+
+    <main class="container">
+
+        <!-- TOP BAR -->
+
+        <div class="top-bar">
+
+            <div class="logo">
+                <span class="logo-icon">P</span>
+                <span>Passsential</span>
+            </div>
+
+            <!-- Theme button -->
+
+            <div class="theme-wrapper">
+
+    <button
+        id="themeButton"
+        class="theme-button"
+        title="Change theme">
+        ◐
+    </button>
+
+    <div id="themeMenu" class="theme-menu">
+
+        <button class="theme-option" data-theme="dark">
+            <span>🌙</span>
+            <span>Dark</span>
+        </button>
+
+        <button class="theme-option" data-theme="light">
+            <span>☀️</span>
+            <span>Light</span>
+        </button>
+
+        <button class="theme-option" data-theme="system">
+            <span>🖥️</span>
+            <span>System Default</span>
+        </button>
+
+    </div>
+
+</div>
+
+        </div>
+
+
+        <!-- MAIN CARD -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <div class="shield">
+                    🛡
+                </div>
+
+                <h1>Password Security</h1>
+
+                <p>
+                    Check how strong your password is
+                    and protect your accounts.
+                </p>
+
+            </div>
+
+
+            <!-- PASSWORD INPUT -->
+
+            <div class="input-section">
+
+                <label for="password">
+                    Enter your password
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password..."
+                        autocomplete="off"
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="eye-button">
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STRENGTH -->
+
+            <div class="strength-section">
+
+                <div class="strength-header">
+
+                    <span>Password Strength</span>
+
+                    <span id="strength">
+                        Waiting...
+                    </span>
+
+                </div>
+
+                <div class="strength-bar">
+
+                    <div
+                        id="strengthFill"
+                        class="strength-fill">
+                    </div>
+
+                </div>
+
+                <p id="strengthMessage">
+                    Enter a password to begin the security check.
+                </p>
+
+            </div>
+
+
+            <!-- PASSWORD INFO -->
+
+            <div class="info-wrapper">
+
+                <button
+                    type="button"
+                    id="infoButton"
+                    class="info-button">
+
+                    <span>ⓘ</span>
+                    Password requirements
+
+                </button>
+
+
+                <div
+                    id="requirements"
+                    class="requirements hidden">
+
+                    <h3>Password Requirements</h3>
+
+                    <div class="requirement" id="length">
+                        <span class="check">✓</span>
+                        At least 8 characters
+                    </div>
+
+                    <div class="requirement" id="uppercase">
+                        <span class="check">✓</span>
+                        Contains uppercase letter
+                    </div>
+
+                    <div class="requirement" id="lowercase">
+                        <span class="check">✓</span>
+                        Contains lowercase letter
+                    </div>
+
+                    <div class="requirement" id="number">
+                        <span class="check">✓</span>
+                        Contains a number
+                    </div>
+
+                    <div class="requirement" id="special">
+                        <span class="check">✓</span>
+                        Contains special character
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BREACH -->
+
+            <div class="breach">
+
+                <div class="breach-icon">
+                    ⚠
+                </div>
+
+                <div>
+
+                    <h3>Breach Detection</h3>
+
+                    <p>
+                        Breach checking will be available soon.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <span>PASSENTIAL</span>
+            <span>•</span>
+            <span>SECURITY FIRST</span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
