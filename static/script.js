@@ -30,29 +30,30 @@ togglePassword.addEventListener("click", function () {
     }
 
 });
-
-
 /* =========================
-   PASSWORD CHECKER
+   RESET WHEN INPUT IS EMPTY
 ========================= */
 
+passwordInput.addEventListener("input", function () {
+
+    if (passwordInput.value.length === 0) {
+
+        resetChecker();
+
+    }
+
+});
 passwordInput.addEventListener("input", async function () {
 
     const password = passwordInput.value;
 
-
-    /* Empty password */
-
+    // Empty input → reset everything
     if (password.length === 0) {
-
         resetChecker();
-
         return;
     }
 
-
-    /* Update requirements */
-
+    // Update requirements
     updateRequirement(
         "length",
         password.length >= 8
@@ -78,9 +79,7 @@ passwordInput.addEventListener("input", async function () {
         /[^A-Za-z0-9]/.test(password)
     );
 
-
-    /* Send password to Flask */
-
+    // Check password strength
     try {
 
         const response = await fetch("/check-password", {
@@ -97,21 +96,20 @@ passwordInput.addEventListener("input", async function () {
 
         });
 
-
         const data = await response.json();
 
-        updateStrength(data.score, data.strength);
+        updateStrength(
+            data.score,
+            data.strength
+        );
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error("Error:", error);
 
     }
 
 });
-
 
 /* =========================
    REQUIREMENT FUNCTION
@@ -223,8 +221,6 @@ function resetChecker() {
 const infoButton = document.getElementById("infoButton");
 
 const requirements = document.getElementById("requirements");
-
-
 infoButton.addEventListener("click", function () {
 
     requirements.classList.toggle("hidden");
@@ -232,9 +228,80 @@ infoButton.addEventListener("click", function () {
 });
 
 
-/* =========================
-   THEME SWITCHER
-========================= */
+let passwordChecked = false;
+
+passwordInput.addEventListener("input", async function () {
+
+    const password = passwordInput.value;
+
+    // If box is completely empty, return to initial state
+    if (password.length === 0) {
+        passwordChecked = false;
+        resetChecker();
+        return;
+    }
+
+    // Don't check dynamically until the user has clicked
+    // "Check Password" at least once
+    if (!passwordChecked) {
+        return;
+    }
+
+    // Update requirements dynamically
+    updateRequirement(
+        "length",
+        password.length >= 8
+    );
+
+    updateRequirement(
+        "uppercase",
+        /[A-Z]/.test(password)
+    );
+
+    updateRequirement(
+        "lowercase",
+        /[a-z]/.test(password)
+    );
+
+    updateRequirement(
+        "number",
+        /[0-9]/.test(password)
+    );
+
+    updateRequirement(
+        "special",
+        /[^A-Za-z0-9]/.test(password)
+    );
+
+    // Check updated password
+    try {
+
+        const response = await fetch("/check-password", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                password: password
+            })
+
+        });
+
+        const data = await response.json();
+
+        updateStrength(
+            data.score,
+            data.strength
+        );
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+
+});
 /* =========================
    THEME MENU
 ========================= */
@@ -350,4 +417,4 @@ themeOptions.forEach(function (option) {
    DEFAULT THEME
 ========================= */
 
-applyTheme("dark");
+applyTheme("system");

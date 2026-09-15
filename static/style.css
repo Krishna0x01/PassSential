@@ -1,19 +1,18 @@
+/* =========================
+   RESET
+========================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 body {
     min-height: 100vh;
-
     font-family: Arial, Helvetica, sans-serif;
-
     background: #050505;
-
     color: white;
-
     overflow-x: hidden;
 }
 
@@ -24,20 +23,14 @@ body {
 
 .background {
     position: fixed;
-
     inset: 0;
-
     overflow: hidden;
-
     z-index: -1;
 }
 
-
 .background::before {
     content: "";
-
     position: absolute;
-
     inset: 0;
 
     background:
@@ -54,50 +47,29 @@ body {
     background-size: 50px 50px;
 }
 
-
 .glow {
     position: absolute;
-
     width: 500px;
     height: 500px;
-
     border-radius: 50%;
 
     filter: blur(120px);
-
     opacity: 0.18;
 
     animation: float 8s ease-in-out infinite;
 }
 
-
 .glow-one {
     background: red;
-
     top: -200px;
     left: -200px;
 }
 
-
 .glow-two {
     background: #8b0000;
-
     right: -200px;
     bottom: -200px;
-
     animation-delay: -4s;
-}
-
-
-@keyframes float {
-
-    0%, 100% {
-        transform: translate(0, 0);
-    }
-
-    50% {
-        transform: translate(50px, 30px);
-    }
 }
 
 
@@ -107,50 +79,44 @@ body {
 
 .container {
     width: 100%;
-
     max-width: 650px;
-
     margin: auto;
-
     padding: 45px 20px;
 }
 
 
 /* =========================
-   LOGO
+   TOP BAR & LOGO
 ========================= */
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
 
 .logo {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 12px;
 
     font-size: 28px;
-
     font-weight: 700;
-
     letter-spacing: 1px;
 
-    margin-bottom: 35px;
-
+    margin-bottom: 0;
     animation: fadeDown 0.8s ease;
 }
 
-
 .logo-icon {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     width: 42px;
     height: 42px;
-
     border-radius: 12px;
 
     background: #e50914;
@@ -163,17 +129,140 @@ body {
 
 
 /* =========================
+   THEME BUTTON
+========================= */
+
+.theme-wrapper {
+    position: relative;
+}
+
+.theme-button {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    background: rgba(255, 255, 255, 0.04);
+    color: #aaa;
+
+    font-size: 20px;
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.theme-button:hover {
+    color: #ff3333;
+    border-color: rgba(255, 0, 0, 0.3);
+    background: rgba(255, 0, 0, 0.08);
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   THEME MENU
+========================= */
+
+.theme-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+
+    width: 190px;
+    padding: 7px;
+
+    border-radius: 14px;
+
+    background: rgba(18, 18, 18, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.5),
+        0 0 25px rgba(255, 0, 0, 0.08);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-8px) scale(0.96);
+    transform-origin: top right;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+
+    z-index: 100;
+}
+
+.theme-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.theme-option {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 11px 12px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: transparent;
+    color: #aaa;
+
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.theme-option span:first-child {
+    width: 22px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.theme-option:hover {
+    background: rgba(255, 0, 0, 0.08);
+    color: white;
+    transform: translateX(3px);
+}
+
+.theme-option.active {
+    background: rgba(229, 9, 20, 0.12);
+    color: #ff3333;
+}
+
+
+/* =========================
    CARD
 ========================= */
 
 .card {
-
     padding: 35px;
-
     border-radius: 24px;
 
     background: rgba(15, 15, 15, 0.78);
-
     border: 1px solid rgba(255, 255, 255, 0.08);
 
     backdrop-filter: blur(20px);
@@ -184,13 +273,12 @@ body {
 
     animation: cardAppear 0.9s cubic-bezier(.16, 1, .3, 1);
 
-    transition: border-color 0.3s ease,
-                box-shadow 0.3s ease;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-
 .card:hover {
-
     border-color: rgba(255, 0, 0, 0.25);
 
     box-shadow:
@@ -200,34 +288,28 @@ body {
 
 
 /* =========================
-   HEADER
+   CARD HEADER
 ========================= */
 
 .card-header {
     text-align: center;
-
     margin-bottom: 35px;
 }
 
-
 .shield {
-
     width: 65px;
     height: 65px;
 
     margin: 0 auto 20px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     font-size: 30px;
-
     border-radius: 18px;
 
     background: rgba(255, 0, 0, 0.08);
-
     border: 1px solid rgba(255, 0, 0, 0.25);
 
     box-shadow:
@@ -236,73 +318,50 @@ body {
     animation: shieldPulse 3s ease-in-out infinite;
 }
 
-
 .card-header h1 {
-
     font-size: 30px;
-
     margin-bottom: 10px;
 }
 
-
 .card-header p {
-
     color: #888;
-
     line-height: 1.6;
-
     font-size: 14px;
 }
 
 
 /* =========================
-   INPUT
+   PASSWORD INPUT
 ========================= */
 
 .input-section {
-
     margin-bottom: 30px;
 }
 
-
 label {
-
     display: block;
-
     font-size: 14px;
-
     color: #bbb;
-
     margin-bottom: 10px;
 }
 
-
 .password-box {
-
     position: relative;
-
     display: flex;
-
     align-items: center;
 }
 
-
 .password-box input {
-
     width: 100%;
-
     height: 58px;
 
     padding: 0 55px 0 18px;
 
     border-radius: 14px;
-
     border: 1px solid #292929;
-
     outline: none;
 
     background: #0b0b0b;
-
     color: white;
 
     font-size: 16px;
@@ -313,17 +372,12 @@ label {
         background 0.3s ease;
 }
 
-
 .password-box input::placeholder {
-
     color: #555;
 }
 
-
 .password-box input:focus {
-
     border-color: #e50914;
-
     background: #101010;
 
     box-shadow:
@@ -332,25 +386,24 @@ label {
 }
 
 
+/* =========================
+   PASSWORD VISIBILITY
+========================= */
+
 .eye-button {
-
     position: absolute;
-
     right: 8px;
 
     width: 42px;
     height: 42px;
 
     border: none;
-
     border-radius: 10px;
 
     background: transparent;
-
     color: #777;
 
     cursor: pointer;
-
     font-size: 18px;
 
     transition:
@@ -359,73 +412,48 @@ label {
         transform 0.2s ease;
 }
 
-
 .eye-button:hover {
-
     color: #ff3333;
-
     background: rgba(255, 0, 0, 0.08);
-
     transform: scale(1.05);
 }
-
-
 /* =========================
    STRENGTH
 ========================= */
 
 .strength-section {
-
     margin-bottom: 30px;
 }
 
-
 .strength-header {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
     margin-bottom: 10px;
-
     font-size: 14px;
 }
 
-
 #strength {
-
     color: #777;
-
     font-weight: bold;
-
     transition: color 0.3s ease;
 }
 
-
 .strength-bar {
-
     width: 100%;
-
     height: 7px;
 
     background: #202020;
-
     border-radius: 20px;
-
     overflow: hidden;
 }
 
-
 .strength-fill {
-
     height: 100%;
-
     width: 0%;
 
     border-radius: inherit;
-
     background: #e50914;
 
     transition:
@@ -436,13 +464,10 @@ label {
         0 0 15px rgba(255, 0, 0, 0.5);
 }
 
-
 #strengthMessage {
-
     margin-top: 10px;
 
     color: #777;
-
     font-size: 13px;
 
     transition:
@@ -452,43 +477,100 @@ label {
 
 
 /* =========================
-   REQUIREMENTS
+   PASSWORD REQUIREMENTS
 ========================= */
 
+.info-wrapper {
+    margin-bottom: 20px;
+}
+
+.info-button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 14px 16px;
+
+    border-radius: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    background: rgba(255, 255, 255, 0.025);
+    color: #999;
+
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.info-button:hover {
+    color: #eee;
+    border-color: rgba(255, 0, 0, 0.25);
+    background: rgba(255, 0, 0, 0.05);
+}
+
+.info-button span {
+    color: #e50914;
+    font-size: 18px;
+}
+
 .requirements {
+    margin-top: 10px;
+    margin-bottom: 20px;
 
     padding: 20px;
 
     border-radius: 16px;
 
     background: rgba(255, 255, 255, 0.025);
-
     border: 1px solid rgba(255, 255, 255, 0.05);
 
-    margin-bottom: 20px;
+    overflow: hidden;
+
+    max-height: 300px;
+    opacity: 1;
+
+    transform: translateY(0);
+
+    transition:
+        max-height 0.4s ease,
+        opacity 0.3s ease,
+        transform 0.4s ease,
+        padding 0.4s ease;
 }
 
+.requirements.hidden {
+    max-height: 0;
+    opacity: 0;
+
+    padding-top: 0;
+    padding-bottom: 0;
+
+    margin-top: 0;
+
+    transform: translateY(-10px);
+
+    border-color: transparent;
+}
 
 .requirements h3 {
-
     font-size: 14px;
-
     margin-bottom: 15px;
-
     color: #ddd;
 }
 
-
 .requirement {
-
     display: flex;
-
     align-items: center;
-
     gap: 10px;
 
     color: #666;
-
     font-size: 13px;
 
     margin-bottom: 10px;
@@ -498,27 +580,21 @@ label {
         transform 0.3s ease;
 }
 
-
 .requirement:last-child {
-
     margin-bottom: 0;
 }
 
-
 .check {
-
     width: 20px;
     height: 20px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     border-radius: 50%;
 
     background: #1b1b1b;
-
     color: #555;
 
     font-size: 11px;
@@ -529,21 +605,13 @@ label {
         box-shadow 0.3s ease;
 }
 
-
-/* Requirement satisfied */
-
 .requirement.valid {
-
     color: #ddd;
-
     transform: translateX(4px);
 }
 
-
 .requirement.valid .check {
-
     background: #e50914;
-
     color: white;
 
     box-shadow:
@@ -552,15 +620,12 @@ label {
 
 
 /* =========================
-   BREACH
+   BREACH DETECTION
 ========================= */
 
 .breach {
-
     display: flex;
-
     align-items: center;
-
     gap: 15px;
 
     padding: 18px;
@@ -568,20 +633,16 @@ label {
     border-radius: 16px;
 
     border: 1px solid rgba(255, 120, 0, 0.15);
-
     background: rgba(255, 100, 0, 0.035);
 }
 
-
 .breach-icon {
-
     width: 42px;
     height: 42px;
 
     flex-shrink: 0;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -592,19 +653,13 @@ label {
     font-size: 20px;
 }
 
-
 .breach h3 {
-
     font-size: 14px;
-
     margin-bottom: 5px;
 }
 
-
 .breach p {
-
     color: #777;
-
     font-size: 12px;
 }
 
@@ -614,19 +669,14 @@ label {
 ========================= */
 
 footer {
-
     display: flex;
-
     justify-content: center;
-
     gap: 10px;
 
     margin-top: 25px;
 
     color: #444;
-
     font-size: 10px;
-
     letter-spacing: 2px;
 
     animation: fadeUp 1s ease;
@@ -637,8 +687,17 @@ footer {
    ANIMATIONS
 ========================= */
 
-@keyframes cardAppear {
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
 
+    50% {
+        transform: translate(50px, 30px);
+    }
+}
+
+@keyframes cardAppear {
     from {
         opacity: 0;
         transform: translateY(35px) scale(0.97);
@@ -650,9 +709,7 @@ footer {
     }
 }
 
-
 @keyframes fadeDown {
-
     from {
         opacity: 0;
         transform: translateY(-20px);
@@ -664,9 +721,7 @@ footer {
     }
 }
 
-
 @keyframes fadeUp {
-
     from {
         opacity: 0;
         transform: translateY(15px);
@@ -678,9 +733,7 @@ footer {
     }
 }
 
-
 @keyframes shieldPulse {
-
     0%, 100% {
         box-shadow:
             0 0 20px rgba(255, 0, 0, 0.1);
@@ -694,10 +747,125 @@ footer {
 
 
 /* =========================
+   LIGHT THEME
+========================= */
+
+body.light {
+    background: #f4f4f4;
+    color: #111;
+}
+
+body.light .card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.08);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.12);
+}
+
+body.light .card-header p {
+    color: #666;
+}
+
+body.light .password-box input {
+    background: #fff;
+    color: #111;
+    border-color: #ddd;
+}
+
+body.light .password-box input::placeholder {
+    color: #999;
+}
+
+body.light .requirements,
+body.light .info-button {
+    background: rgba(0, 0, 0, 0.025);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light .requirement {
+    color: #777;
+}
+
+body.light .requirement.valid {
+    color: #333;
+}
+
+body.light .theme-button {
+    color: #555;
+    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+body.light .breach {
+    background: rgba(255, 100, 0, 0.05);
+}
+
+body.light .breach p {
+    color: #777;
+}
+
+
+/* =========================
+   SYSTEM THEME
+========================= */
+
+@media (prefers-color-scheme: light) {
+
+    body.system {
+        background: #f4f4f4;
+        color: #111;
+    }
+
+    body.system .card {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(0, 0, 0, 0.08);
+
+        box-shadow:
+            0 25px 70px rgba(0, 0, 0, 0.12);
+    }
+
+    body.system .card-header p {
+        color: #666;
+    }
+
+    body.system .password-box input {
+        background: #fff;
+        color: #111;
+        border-color: #ddd;
+    }
+
+    body.system .password-box input::placeholder {
+        color: #999;
+    }
+
+    body.system .requirements,
+    body.system .info-button {
+        background: rgba(0, 0, 0, 0.025);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    body.system .requirement {
+        color: #777;
+    }
+
+    body.system .requirement.valid {
+        color: #333;
+    }
+
+    body.system .theme-button {
+        color: #555;
+        border-color: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, 0.04);
+    }
+}
+
+
+/* =========================
    MOBILE
 ========================= */
 
-/* @media (max-width: 600px) {
+@media (max-width: 600px) {
 
     .container {
         padding: 25px 15px;
@@ -714,480 +882,4 @@ footer {
     .logo {
         font-size: 24px;
     }
-} */
-/* =========================
-   TOP BAR
-========================= */
-
-.top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 35px;
-}
-
-.top-bar .logo {
-    margin-bottom: 0;
-}
-
-
-/* =========================
-   THEME BUTTON
-========================= */
-
-.theme-button {
-    width: 44px;
-    height: 44px;
-
-    border-radius: 12px;
-
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    background: rgba(255, 255, 255, 0.04);
-
-    color: #aaa;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.theme-button:hover {
-    transform: rotate(25deg) scale(1.08);
-
-    color: #ff3333;
-
-    border-color: rgba(255, 0, 0, 0.3);
-
-    background: rgba(255, 0, 0, 0.08);
-}
-
-
-/* =========================
-   INFO BUTTON
-========================= */
-
-.info-wrapper {
-    margin-bottom: 20px;
-}
-
-
-.info-button {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 14px 16px;
-
-    border-radius: 13px;
-
-    border: 1px solid rgba(255, 255, 255, 0.07);
-
-    background: rgba(255, 255, 255, 0.025);
-
-    color: #999;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    text-align: left;
-
-    transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
-}
-
-
-.info-button:hover {
-    color: #eee;
-
-    border-color: rgba(255, 0, 0, 0.25);
-
-    background: rgba(255, 0, 0, 0.05);
-}
-
-
-.info-button span {
-    color: #e50914;
-
-    font-size: 18px;
-}
-
-
-/* =========================
-   REQUIREMENTS
-========================= */
-
-.requirements {
-    margin-top: 10px;
-
-    padding: 20px;
-
-    border-radius: 16px;
-
-    background: rgba(255, 255, 255, 0.025);
-
-    border: 1px solid rgba(255, 255, 255, 0.05);
-
-    overflow: hidden;
-
-    max-height: 300px;
-
-    opacity: 1;
-
-    transform: translateY(0);
-
-    transition:
-        max-height 0.4s ease,
-        opacity 0.3s ease,
-        transform 0.4s ease,
-        padding 0.4s ease;
-}
-
-
-/* Hidden state */
-
-.requirements.hidden {
-
-    max-height: 0;
-
-    opacity: 0;
-
-    padding-top: 0;
-    padding-bottom: 0;
-
-    margin-top: 0;
-
-    transform: translateY(-10px);
-
-    border-color: transparent;
-}
-
-
-/* =========================
-   LIGHT THEME
-========================= */
-
-body.light {
-    background: #f4f4f4;
-
-    color: #111;
-}
-
-
-body.light .card {
-    background: rgba(255, 255, 255, 0.8);
-
-    border-color: rgba(0, 0, 0, 0.08);
-
-    box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.12);
-}
-
-
-body.light .card-header p {
-    color: #666;
-}
-
-
-body.light .password-box input {
-    background: #fff;
-
-    color: #111;
-
-    border-color: #ddd;
-}
-
-
-body.light .password-box input::placeholder {
-    color: #999;
-}
-
-
-body.light .requirements,
-body.light .info-button {
-    background: rgba(0, 0, 0, 0.025);
-
-    border-color: rgba(0, 0, 0, 0.08);
-}
-
-
-body.light .requirement {
-    color: #777;
-}
-
-
-body.light .requirement.valid {
-    color: #333;
-}
-
-
-body.light .theme-button {
-    color: #555;
-
-    border-color: rgba(0, 0, 0, 0.1);
-
-    background: rgba(0, 0, 0, 0.04);
-}
-
-
-body.light .breach {
-    background: rgba(255, 100, 0, 0.05);
-}
-
-
-body.light .breach p {
-    color: #777;
-}
-
-
-/* =========================
-   SYSTEM THEME
-========================= */
-
-@media (prefers-color-scheme: light) {
-
-    body.system {
-
-        background: #f4f4f4;
-
-        color: #111;
-    }
-
-    body.system .card {
-
-        background: rgba(255, 255, 255, 0.8);
-
-        border-color: rgba(0, 0, 0, 0.08);
-
-        box-shadow:
-            0 25px 70px rgba(0, 0, 0, 0.12);
-    }
-
-    body.system .card-header p {
-        color: #666;
-    }
-
-    body.system .password-box input {
-
-        background: #fff;
-
-        color: #111;
-
-        border-color: #ddd;
-    }
-
-    body.system .password-box input::placeholder {
-        color: #999;
-    }
-
-    body.system .requirements,
-    body.system .info-button {
-
-        background: rgba(0, 0, 0, 0.025);
-
-        border-color: rgba(0, 0, 0, 0.08);
-    }
-
-    body.system .requirement {
-        color: #777;
-    }
-
-    body.system .requirement.valid {
-        color: #333;
-    }
-
-    body.system .theme-button {
-
-        color: #555;
-
-        border-color: rgba(0, 0, 0, 0.1);
-
-        background: rgba(0, 0, 0, 0.04);
-    }
-}
-/* =========================
-   THEME MENU
-========================= */
-
-.theme-wrapper {
-    position: relative;
-}
-
-
-.theme-button {
-    width: 44px;
-    height: 44px;
-
-    border-radius: 12px;
-
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    background: rgba(255, 255, 255, 0.04);
-
-    color: #aaa;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        color 0.25s ease,
-        border-color 0.25s ease;
-}
-
-
-.theme-button:hover {
-    color: #ff3333;
-
-    border-color: rgba(255, 0, 0, 0.3);
-
-    background: rgba(255, 0, 0, 0.08);
-
-    transform: scale(1.05);
-}
-
-
-/* =========================
-   DROPDOWN
-========================= */
-
-.theme-menu {
-
-    position: absolute;
-
-    top: calc(100% + 10px);
-
-    right: 0;
-
-    width: 190px;
-
-    padding: 7px;
-
-    border-radius: 14px;
-
-    background: rgba(18, 18, 18, 0.96);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    backdrop-filter: blur(20px);
-
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.5),
-        0 0 25px rgba(255, 0, 0, 0.08);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform:
-        translateY(-8px)
-        scale(0.96);
-
-    transform-origin: top right;
-
-    transition:
-        opacity 0.2s ease,
-        transform 0.25s ease,
-        visibility 0.25s ease;
-
-    z-index: 100;
-}
-
-
-/* Open state */
-
-.theme-menu.show {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-
-/* =========================
-   THEME OPTIONS
-========================= */
-
-.theme-option {
-
-    width: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 11px 12px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background: transparent;
-
-    color: #aaa;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    text-align: left;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.theme-option span:first-child {
-
-    width: 22px;
-
-    text-align: center;
-
-    font-size: 15px;
-}
-
-
-.theme-option:hover {
-
-    background: rgba(255, 0, 0, 0.08);
-
-    color: white;
-
-    transform: translateX(3px);
-}
-
-
-/* Selected theme */
-
-.theme-option.active {
-
-    background: rgba(229, 9, 20, 0.12);
-
-    color: #ff3333;
 }
