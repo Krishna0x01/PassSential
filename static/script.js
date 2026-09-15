@@ -193,7 +193,7 @@ function updateStrength(score, strength) {
 
 function resetChecker() {
 
-    strengthText.textContent = "Waiting...";
+    strengthText.textContent = "";
 
     strengthText.style.color = "#777";
 

@@ -79,11 +79,10 @@ body {
 
 .container {
     width: 100%;
-    max-width: 650px;
-    margin: auto;
-    padding: 45px 20px;
+    max-width: none;
+    margin: 0;
+    padding: 40px 50px;
 }
-
 
 /* =========================
    TOP BAR & LOGO
@@ -257,8 +256,11 @@ body {
 /* =========================
    CARD
 ========================= */
-
 .card {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+
     padding: 35px;
     border-radius: 24px;
 
@@ -291,10 +293,38 @@ body {
    CARD HEADER
 ========================= */
 
+.card {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px;
+    border-radius: 24px;
+
+    background: rgba(15, 15, 15, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.65),
+        0 0 40px rgba(255, 0, 0, 0.06);
+
+    animation: cardAppear 0.9s cubic-bezier(.16, 1, .3, 1);
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* =========================
+   CARD HEADER
+========================= */
+
 .card-header {
     text-align: center;
-    margin-bottom: 35px;
 }
+
 
 .shield {
     width: 65px;
@@ -318,17 +348,22 @@ body {
     animation: shieldPulse 3s ease-in-out infinite;
 }
 
+
 .card-header h1 {
     font-size: 30px;
     margin-bottom: 10px;
+
+    text-align: center;
 }
+
 
 .card-header p {
     color: #888;
     line-height: 1.6;
     font-size: 14px;
-}
 
+    text-align: center;
+}
 
 /* =========================
    PASSWORD INPUT
@@ -681,7 +716,237 @@ footer {
 
     animation: fadeUp 1s ease;
 }
+/* =========================
+   SECURITY INFORMATION
+========================= */
 
+.security-info {
+    width: 100%;
+    max-width: 1400px;
+    margin: 80px auto 0;
+}
+
+
+/* =========================
+   INFO SECTION
+========================= */
+
+.info-section {
+    padding: 80px 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.info-content {
+    max-width: 900px;
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: #e50914;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+.info-section h2 {
+    margin-bottom: 22px;
+
+    font-size: 34px;
+    line-height: 1.2;
+}
+
+
+.info-section p {
+    max-width: 850px;
+
+    margin-bottom: 15px;
+
+    color: #888;
+
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   SECURITY GRID
+========================= */
+
+.security-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-top: 35px;
+}
+
+
+.security-item {
+    padding: 28px;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.security-item:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(255, 0, 0, 0.25);
+
+    background: rgba(255, 0, 0, 0.035);
+}
+
+
+.security-number {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #e50914;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+.security-item h3 {
+    margin-bottom: 10px;
+
+    font-size: 18px;
+}
+
+
+.security-item p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   COMMON MISTAKES
+========================= */
+
+.mistakes {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 35px;
+}
+
+
+.mistake {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+.mistake > span {
+    color: #e50914;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.mistake p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   SECURITY TIPS
+========================= */
+
+.tips-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 35px;
+}
+
+
+.tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    background: rgba(229, 9, 20, 0.035);
+
+    border: 1px solid rgba(229, 9, 20, 0.1);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.tip:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(229, 9, 20, 0.25);
+}
+
+
+.tip > span {
+    color: #00c968;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.tip p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
 
 /* =========================
    ANIMATIONS
@@ -882,4 +1147,392 @@ body.light .breach p {
     .logo {
         font-size: 24px;
     }
+
+    .security-info {
+        margin-top: 50px;
+    }
+
+    .info-section {
+        padding: 55px 10px;
+    }
+
+    .info-section h2 {
+        font-size: 27px;
+    }
+
+    .security-grid,
+    .mistakes,
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================
+   ADDITIONAL SECURITY INFO
+========================= */
+
+.security-info {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 100px auto 0;
+}
+
+
+/* =========================
+   SECURITY INTRO
+========================= */
+
+.security-intro {
+    width: 100%;
+
+    padding: 80px 20px;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.security-intro .section-label {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: #e50914;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+.security-intro h2 {
+    margin-bottom: 18px;
+
+    font-size: 38px;
+    line-height: 1.2;
+}
+
+.security-intro p {
+    max-width: 750px;
+
+    margin: 0 auto;
+
+    color: #888;
+
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   INFORMATION BOX GRID
+========================= */
+
+.info-box-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 22px;
+
+    padding: 70px 20px;
+}
+
+
+/* =========================
+   INFORMATION BOX
+========================= */
+
+.info-box {
+    position: relative;
+
+    min-height: 280px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.015)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* RED GLOW */
+
+.info-box::before {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    top: -80px;
+    right: -80px;
+
+    border-radius: 50%;
+
+    background: rgba(229, 9, 20, 0.12);
+
+    filter: blur(45px);
+
+    transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+}
+
+
+.info-box:hover {
+    transform: translateY(-8px);
+
+    border-color:
+        rgba(229, 9, 20, 0.35);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35),
+        0 0 35px rgba(229, 9, 20, 0.08);
+}
+
+
+.info-box:hover::before {
+    transform: scale(1.4);
+
+    opacity: 1;
+}
+
+
+/* =========================
+   BOX ICON
+========================= */
+
+.info-box-icon {
+    position: relative;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    border-radius: 14px;
+
+    background: rgba(229, 9, 20, 0.08);
+
+    border: 1px solid rgba(229, 9, 20, 0.18);
+
+    font-size: 22px;
+}
+
+
+/* =========================
+   BOX NUMBER
+========================= */
+
+.box-number {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #e50914;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   BOX TEXT
+========================= */
+
+.info-box h3 {
+    margin-bottom: 12px;
+
+    font-size: 19px;
+}
+
+
+.info-box p {
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   SECURITY BANNER
+========================= */
+
+.security-banner {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    margin: 20px;
+
+    padding: 45px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(229, 9, 20, 0.12),
+            rgba(229, 9, 20, 0.025)
+        );
+
+    border:
+        1px solid rgba(229, 9, 20, 0.15);
+}
+
+
+.security-banner h2 {
+    font-size: 26px;
+}
+
+
+.security-banner p {
+    max-width: 450px;
+
+    color: #888;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .info-box-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 25px 15px;
+    }
+
+
+    .card {
+        padding: 25px 20px;
+    }
+
+
+    .security-info {
+        margin-top: 60px;
+    }
+
+
+    .security-intro {
+        padding: 60px 15px;
+    }
+
+
+    .security-intro h2 {
+        font-size: 28px;
+    }
+
+
+    .info-box-grid {
+        grid-template-columns: 1fr;
+
+        padding: 50px 10px;
+    }
+
+
+    .security-banner {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        margin: 10px;
+
+        padding: 30px 25px;
+    }
+
+
+    .security-banner h2 {
+        font-size: 22px;
+    }
+
+}
+/* =========================
+   LIGHT THEME - INFO
+========================= */
+
+body.light .security-intro {
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+
+body.light .info-box {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0, 0, 0, 0.025),
+            rgba(0, 0, 0, 0.01)
+        );
+
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+
+body.light .info-box:hover {
+    border-color: rgba(229, 9, 20, 0.3);
+}
+
+
+@media (prefers-color-scheme: light) {
+
+    body.system .security-intro {
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+
+
+    body.system .info-box {
+        background:
+            linear-gradient(
+                145deg,
+                rgba(0, 0, 0, 0.025),
+                rgba(0, 0, 0, 0.01)
+            );
+
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+
+
+    body.system .info-box:hover {
+        border-color: rgba(229, 9, 20, 0.3);
+    }
+
 }
