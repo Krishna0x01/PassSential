@@ -52,48 +52,52 @@
 
             <!-- THEME BUTTON -->
 
-            <div class="theme-wrapper">
+            <div class="header-actions">
 
-                <button
-                    id="themeButton"
-                    class="theme-button"
-                    title="Change theme">
-                    ◐
-                </button>
-
-
-                <div
-                    id="themeMenu"
-                    class="theme-menu">
+                <div class="theme-wrapper">
 
                     <button
-                        class="theme-option"
-                        data-theme="dark">
-
-                        <span>⏾</span>
-                        <span>Dark</span>
-
+                        id="themeButton"
+                        class="theme-button"
+                        title="Change theme">
+                        ◐
                     </button>
 
 
-                    <button
-                        class="theme-option"
-                        data-theme="light">
+                    <div
+                        id="themeMenu"
+                        class="theme-menu">
 
-                        <span>☀️</span>
-                        <span>Light</span>
+                        <button
+                            class="theme-option"
+                            data-theme="dark">
 
-                    </button>
+                            <span>⏾</span>
+                            <span>Dark</span>
+
+                        </button>
 
 
-                    <button
-                        class="theme-option"
-                        data-theme="system">
+                        <button
+                            class="theme-option"
+                            data-theme="light">
 
-                        <span>🖥️</span>
-                        <span>System Default</span>
+                            <span>☀️</span>
+                            <span>Light</span>
 
-                    </button>
+                        </button>
+
+
+                        <button
+                            class="theme-option"
+                            data-theme="system">
+
+                            <span>🖥️</span>
+                            <span>System Default</span>
+
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -101,6 +105,74 @@
 
         </div>
 
+
+        <!-- =========================
+             PASSWORD HISTORY BUTTON
+             BELOW LOGO
+        ========================= -->
+
+        <button
+            type="button"
+            id="historyButton"
+            class="history-button"
+            title="Open password history"
+            aria-label="Open password history">
+            ☰
+        </button>
+
+
+        <!-- =========================
+             PASSWORD HISTORY SIDEBAR
+        ========================= -->
+
+        <aside
+            id="historySidebar"
+            class="history-sidebar"
+            aria-hidden="true">
+
+            <div class="history-header">
+
+                <div>
+                    <span class="history-label">PASSWORD CHECKS</span>
+                    <h2>History</h2>
+                </div>
+
+                <button
+                    type="button"
+                    id="closeHistory"
+                    class="history-close"
+                    aria-label="Close password history">
+                    ×
+                </button>
+
+            </div>
+
+            <p class="history-note">
+                History lasts only while this page is open. Passwords are never stored in the history.
+            </p>
+
+            <div id="historyList" class="history-list">
+
+                <div id="historyEmpty" class="history-empty">
+                    No password checks yet.
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                id="clearHistory"
+                class="clear-history">
+                Clear history
+            </button>
+
+        </aside>
+
+
+        <div
+            id="historyOverlay"
+            class="history-overlay">
+        </div>
 
 
         <!-- =========================
@@ -128,7 +200,6 @@
                 </p>
 
             </div>
-
 
 
             <!-- =========================
@@ -166,7 +237,6 @@
             </div>
 
 
-
             <!-- =========================
                  STRENGTH
             ========================= -->
@@ -196,14 +266,23 @@
 
 
                 <p id="strengthMessage">
-                    Estimated brute-force crack time:
-                    <strong id="crackTime">—</strong>
+                    Enter a password to begin the security check.
                 </p>
 
+
+                <div class="crack-time">
+
+                    <span>
+                        Estimated brute-force crack time
+                    </span>
+
+                    <strong id="crackTime">
+                        0
+                    </strong>
+
+                </div>
+
             </div>
-
-
-
 
 
             <!-- =========================
@@ -233,7 +312,6 @@
 
 
         </section>
-
 
 
         <!-- =====================================================
@@ -266,7 +344,6 @@
                 </p>
 
             </div>
-
 
 
             <!-- =========================
@@ -304,7 +381,6 @@
                 </div>
 
 
-
                 <!-- BOX 2 -->
 
                 <div class="info-box">
@@ -333,7 +409,6 @@
                 </div>
 
 
-
                 <!-- BOX 3 -->
 
                 <div class="info-box">
@@ -360,7 +435,6 @@
                     </p>
 
                 </div>
-
 
 
                 <!-- BOX 4 -->
@@ -392,7 +466,6 @@
 
 
             </div>
-
 
 
             <!-- =========================
@@ -428,7 +501,6 @@
         </section>
 
 
-
         <!-- =========================
              FOOTER
         ========================= -->
@@ -451,7 +523,6 @@
 
 
     </main>
-
 
 
     <!-- =========================

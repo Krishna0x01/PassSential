@@ -5,56 +5,6 @@ import math
 app = Flask(__name__)
 
 
-def estimate_crack_time(password):
-    """
-    Rough brute-force estimate.
-
-    Assumption: an attacker can try 10 billion guesses per second.
-    Real cracking speed varies by password-hashing algorithm, hardware,
-    attack method, and whether the password is common or predictable.
-    """
-    if not password:
-        return "—"
-
-    charset_size = 0
-
-    if re.search(r"[a-z]", password):
-        charset_size += 26
-    if re.search(r"[A-Z]", password):
-        charset_size += 26
-    if re.search(r"[0-9]", password):
-        charset_size += 10
-    if re.search(r"[^A-Za-z0-9]", password):
-        charset_size += 33
-
-    # Average guesses needed is roughly half of the full search space.
-    # Logarithms prevent overflow for very long passwords.
-    log10_seconds = (
-        len(password) * math.log10(charset_size)
-        - math.log10(2)
-        - math.log10(10_000_000_000)
-    )
-
-    if log10_seconds < math.log10(60):
-        return "less than a minute"
-
-    seconds = 10 ** log10_seconds
-
-    if seconds < 3600:
-        return f"about {seconds / 60:.0f} minutes"
-    if seconds < 86400:
-        return f"about {seconds / 3600:.1f} hours"
-    if seconds < 31536000:
-        return f"about {seconds / 86400:.1f} days"
-
-    log10_years = log10_seconds - math.log10(31536000)
-    # Keep the display simple once the estimate goes beyond one century.
-    if log10_years <= 2:
-        years = 10 ** log10_years
-        return f"about {years:,.0f} years"
-    return "over century"
-
-
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -90,10 +40,50 @@ def check_password():
     else:
         strength = "Strong"
 
+    # Educational estimate based on a simple offline brute-force model.
+    # This is only an approximation; real cracking speed depends on the
+    # hashing algorithm, hardware, salts, rate limits, and other factors.
+    charset_size = 0
+
+    if re.search(r"[a-z]", password):
+        charset_size += 26
+
+    if re.search(r"[A-Z]", password):
+        charset_size += 26
+
+    if re.search(r"[0-9]", password):
+        charset_size += 10
+
+    if re.search(r"[^A-Za-z0-9]", password):
+        charset_size += 33
+
+    if charset_size == 0:
+        crack_time = "0"
+    else:
+        # Approximate 10 billion guesses per second.
+        guesses = charset_size ** len(password)
+        seconds = guesses / (10 ** 10 * 2)
+        century = 100 * 365.25 * 24 * 60 * 60
+
+        if seconds >= century:
+            crack_time = "Over a century"
+        elif seconds < 1:
+            crack_time = "Less than a second"
+        elif seconds < 60:
+            crack_time = f"{seconds:.0f} seconds"
+        elif seconds < 3600:
+            crack_time = f"{seconds / 60:.0f} minutes"
+        elif seconds < 86400:
+            crack_time = f"{seconds / 3600:.1f} hours"
+        elif seconds < 31557600:
+            crack_time = f"{seconds / 86400:.1f} days"
+        else:
+            crack_time = f"{seconds / 31557600:.1f} years"
+
     return jsonify({
         "strength": strength,
         "score": score,
-        "crack_time": estimate_crack_time(password)
+        "crack_time": crack_time
     })
 
 
