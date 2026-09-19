@@ -7,6 +7,7 @@ const strengthText = document.getElementById("strength");
 const strengthFill = document.getElementById("strengthFill");
 
 const strengthMessage = document.getElementById("strengthMessage");
+const crackTime = document.getElementById("crackTime");
 
 
 /* =========================
@@ -78,7 +79,8 @@ passwordInput.addEventListener("input", async function () {
 
         updateStrength(
             data.score,
-            data.strength
+            data.strength,
+            data.crack_time
         );
 
 
@@ -95,68 +97,42 @@ passwordInput.addEventListener("input", async function () {
    STRENGTH UI
 ========================= */
 
-function updateStrength(score, strength) {
+function updateStrength(score, strength, crackTimeValue) {
 
     const percentage = score * 20;
 
-
     /* Update progress bar */
-
     strengthFill.style.width = percentage + "%";
 
-
     /* Update strength text */
-
     strengthText.textContent = strength;
 
+    /* Update estimated crack time */
+    crackTime.textContent = crackTimeValue || "Unknown";
 
     /* Weak */
-
     if (strength === "Weak") {
 
         strengthText.style.color = "#ff3333";
-
         strengthFill.style.background = "#e50914";
-
-        strengthMessage.textContent =
-            "This password is easy to guess.";
-
         strengthMessage.style.color = "#ff5555";
-
     }
 
-
     /* Medium */
-
     else if (strength === "Medium") {
 
         strengthText.style.color = "#ff8c00";
-
         strengthFill.style.background = "#ff6a00";
-
-        strengthMessage.textContent =
-            "Your password could be stronger.";
-
         strengthMessage.style.color = "#ff8c00";
-
     }
 
-
     /* Strong */
-
     else {
 
         strengthText.style.color = "#00d26a";
-
         strengthFill.style.background = "#00b85c";
-
-        strengthMessage.textContent =
-            "Strong password. Good job.";
-
         strengthMessage.style.color = "#00c968";
-
     }
-
 }
 
 
@@ -174,8 +150,7 @@ function resetChecker() {
     strengthFill.style.width = "0%";
 
 
-    strengthMessage.textContent =
-        "Enter a password to begin the security check.";
+    crackTime.textContent = "0";
 
     strengthMessage.style.color = "#777";
 
@@ -304,3 +279,4 @@ themeOptions.forEach(function (option) {
 ========================= */
 
 applyTheme("system");
+crackTime.textContent = "0";
