@@ -90,8 +90,9 @@ body {
 
 .top-bar {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
     margin-bottom: 35px;
 }
 
@@ -99,7 +100,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-
+    align-self: flex-start;
     margin-left: -15px;
 
     font-size: 26px;
@@ -256,7 +257,7 @@ body {
 ========================= */
 .card {
     width: 100%;
-    max-width: 850px;
+    max-width: 1060px;
     margin: 0 auto;
 
     padding: 35px;
@@ -287,32 +288,7 @@ body {
 }
 
 
-/* =========================
-   CARD HEADER
-========================= */
 
-.card {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 35px;
-    border-radius: 24px;
-
-    background: rgba(15, 15, 15, 0.78);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    backdrop-filter: blur(20px);
-
-    box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.65),
-        0 0 40px rgba(255, 0, 0, 0.06);
-
-    animation: cardAppear 0.9s cubic-bezier(.16, 1, .3, 1);
-
-    transition:
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
 
 
 /* =========================
@@ -430,6 +406,10 @@ label {
     width: 42px;
     height: 42px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border: none;
     border-radius: 10px;
 
@@ -437,7 +417,6 @@ label {
     color: #777;
 
     cursor: pointer;
-    font-size: 18px;
 
     transition:
         color 0.2s ease,
@@ -449,6 +428,32 @@ label {
     color: #ff3333;
     background: rgba(255, 0, 0, 0.08);
     transform: scale(1.05);
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.eye-closed {
+    display: none;
+}
+
+.eye-button.showing .eye-open {
+    display: none;
+}
+
+.eye-button.showing .eye-closed {
+    display: block;
 }
 /* =========================
    STRENGTH
@@ -657,45 +662,208 @@ label {
 ========================= */
 
 .breach {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    position: relative;
 
-    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    padding: 28px 120px;
 
     border-radius: 16px;
-
     border: 1px solid rgba(255, 120, 0, 0.15);
     background: rgba(255, 100, 0, 0.035);
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .breach-icon {
     width: 42px;
     height: 42px;
 
-    flex-shrink: 0;
+    display: none;
 
-    display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 12px;
+    margin-bottom: 10px;
 
-    background: rgba(255, 100, 0, 0.08);
+    border-radius: 12px;
+    background: rgba(229, 9, 20, 0.1);
 
     font-size: 20px;
 }
 
+.breach-content {
+    width: 100%;
+}
+
 .breach h3 {
-    font-size: 14px;
-    margin-bottom: 5px;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.breach-result {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.breach-result h4 {
+    font-size: 18px;
+    font-weight: 750;
+    line-height: 1.4;
+    margin: 0 0 12px;
 }
 
 .breach p {
-    color: #777;
-    font-size: 12px;
+    color: #888;
+    font-size: 14px;
+    line-height: 1.75;
+
+    margin: 0 auto;
+    max-width: 700px;
 }
 
+.breach-result strong {
+    font-weight: 800;
+    color: inherit;
+}
+
+.breach-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    padding: 10px 17px;
+
+    border: 1px solid rgba(229, 9, 20, 0.3);
+    border-radius: 10px;
+
+    background: rgba(229, 9, 20, 0.08);
+    color: #ff5555;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.breach-button:hover:not(:disabled) {
+    background: rgba(229, 9, 20, 0.16);
+    border-color: rgba(229, 9, 20, 0.5);
+    color: #ff7777;
+
+    transform: translateY(-1px);
+}
+
+.breach-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =========================
+   BREACH FOUND
+========================= */
+
+.breach.danger {
+    border-color: rgba(229, 9, 20, 0.3);
+    background: rgba(229, 9, 20, 0.045);
+}
+
+.breach.danger .breach-icon {
+    display: flex;
+    background: rgba(229, 9, 20, 0.1);
+}
+
+.breach.danger h3,
+.breach.danger .breach-result h4 {
+    color: #ff5555;
+}
+
+
+/* =========================
+   PASSWORD NOT FOUND
+========================= */
+
+.breach.safe {
+    border-color: rgba(0, 210, 106, 0.22);
+    background: rgba(0, 210, 106, 0.035);
+}
+
+.breach.safe .breach-icon {
+    display: flex;
+
+    background: rgba(0, 210, 106, 0.1);
+
+    color: #00d26a;
+}
+
+.breach.safe h3,
+.breach.safe .breach-result h4 {
+    color: #00c968;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.breach.error {
+    border-color: rgba(255, 140, 0, 0.25);
+    background: rgba(255, 140, 0, 0.035);
+}
+
+.breach.error .breach-icon {
+    display: none;
+}
+
+.breach.error .breach-result h4 {
+    color: #ff9a3d;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .breach {
+        padding: 70px 16px 22px;
+    }
+
+    .breach h3 {
+        font-size: 16px;
+    }
+
+    .breach-result h4 {
+        font-size: 17px;
+    }
+
+    .breach p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .breach-button {
+         top: 18px;
+        right: 18px;
+    }
+
+}
 
 /* =========================
    FOOTER
@@ -1060,6 +1228,14 @@ body.light .theme-button {
     background: rgba(0, 0, 0, 0.04);
 }
 
+body.light .breach-button {
+    background: rgba(229, 9, 20, 0.05);
+}
+
+body.light .breach.safe .breach-button {
+    background: rgba(0, 160, 80, 0.06);
+}
+
 body.light .breach {
     background: rgba(255, 100, 0, 0.05);
 }
@@ -1122,60 +1298,6 @@ body.light .breach p {
         background: rgba(0, 0, 0, 0.04);
     }
 }
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    .container {
-        padding: 25px 15px;
-    }
-
-    .card {
-        padding: 25px 20px;
-    }
-
-    .card-header h1 {
-        font-size: 25px;
-    }
-
-    .logo {
-        font-size: 24px;
-    }
-
-    .security-info {
-        margin-top: 50px;
-    }
-
-    .info-section {
-        padding: 55px 10px;
-    }
-
-    .info-section h2 {
-        font-size: 27px;
-    }
-
-    .security-grid,
-    .mistakes,
-    .tips-grid {
-        grid-template-columns: 1fr;
-    }
-}
-/* =========================
-   ADDITIONAL SECURITY INFO
-========================= */
-
-.security-info {
-    width: 100%;
-    max-width: 1400px;
-
-    margin: 100px auto 0;
-}
-
-
 /* =========================
    SECURITY INTRO
 ========================= */
@@ -1540,9 +1662,21 @@ body.light .info-box:hover {
 ===================================================== */
 
 .header-actions {
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+
+.header-actions .history-button,
+.header-actions .theme-wrapper {
+    flex: 0 0 44px;
+}
+
+.header-actions .theme-wrapper {
+    position: relative;
+    height: 44px;
 }
 
 .history-button {
@@ -1553,10 +1687,6 @@ body.light .info-box:hover {
     align-items: center;
     justify-content: center;
 
-
-    margin-top: 25px;
-    margin-bottom: 25px;
-    margin-left: -15px;
 
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);

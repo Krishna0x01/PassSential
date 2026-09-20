@@ -54,6 +54,15 @@
 
             <div class="header-actions">
 
+                <button
+                    type="button"
+                    id="historyButton"
+                    class="history-button"
+                    title="Open password history"
+                    aria-label="Open password history">
+                    ☰
+                </button>
+
                 <div class="theme-wrapper">
 
                     <button
@@ -105,22 +114,6 @@
 
         </div>
 
-
-        <!-- =========================
-             PASSWORD HISTORY BUTTON
-             BELOW LOGO
-        ========================= -->
-
-        <button
-            type="button"
-            id="historyButton"
-            class="history-button"
-            title="Open password history"
-            aria-label="Open password history">
-            ☰
-        </button>
-
-
         <!-- =========================
              PASSWORD HISTORY SIDEBAR
         ========================= -->
@@ -148,7 +141,7 @@
             </div>
 
             <p class="history-note">
-                History lasts only while this page is open. Passwords are never stored in the history.
+                History lasts only while this page is open. Passwords are kept only in page memory.
             </p>
 
             <div id="historyList" class="history-list">
@@ -226,9 +219,21 @@
                     <button
                         type="button"
                         id="togglePassword"
-                        class="eye-button">
+                        class="eye-button"
+                        aria-label="Show password"
+                        title="Show password">
 
-                        👁
+                        <svg class="eye-icon eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+
+                        <svg class="eye-icon eye-closed" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 3l18 18"></path>
+                            <path d="M10.6 5.2A11.8 11.8 0 0 1 12 5c6.5 0 10 7 10 7a18.7 18.7 0 0 1-3.1 3.8"></path>
+                            <path d="M6.1 6.1C3.4 8.1 2 12 2 12s3.5 7 10 7c1.5 0 2.8-.3 4-.8"></path>
+                            <path d="M9.9 9.9A3 3 0 0 0 14.1 14"></path>
+                        </svg>
 
                     </button>
 
@@ -289,26 +294,34 @@
                  BREACH DETECTION
             ========================= -->
 
-            <div class="breach">
+<div class="breach" id="breachSection">
 
-                <div class="breach-icon">
-                    ⚠
-                </div>
+    <div class="breach-icon" id="breachIcon"></div>
 
+    <div class="breach-content">
 
-                <div>
+        <h3>Breach Detection</h3>
 
-                    <h3>
-                        Breach Detection
-                    </h3>
+        <div class="breach-result" id="breachResult">
+            <h4 id="breachTitle"></h4>
 
-                    <p>
-                        Breach checking will be available soon.
-                    </p>
+            <p id="breachMessage">
+                Check whether this password has appeared in
+                known data breaches.
+            </p>
 
-                </div>
+        </div>
 
-            </div>
+    </div>
+
+    <button
+        type="button"
+        id="breachButton"
+        class="breach-button">
+        Check for Breach
+    </button>
+
+</div>
 
 
         </section>
