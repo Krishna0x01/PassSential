@@ -658,97 +658,34 @@ label {
 
 
 /* =========================
-   BREACH DETECTION
+   BREACH CHECK BUTTON
 ========================= */
 
-.breach {
-    position: relative;
-
+.breach-trigger {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
-    padding: 28px 120px;
-
-    border-radius: 16px;
-    border: 1px solid rgba(255, 120, 0, 0.15);
-    background: rgba(255, 100, 0, 0.035);
-
-    transition:
-        border-color 0.3s ease,
-        background 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.breach-icon {
-    width: 42px;
-    height: 42px;
-
-    display: none;
-
-    align-items: center;
     justify-content: center;
 
-    margin-bottom: 10px;
-
-    border-radius: 12px;
-    background: rgba(229, 9, 20, 0.1);
-
-    font-size: 20px;
+    margin-top: 4px;
 }
 
-.breach-content {
+.breach-trigger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
     width: 100%;
-}
-
-.breach h3 {
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.breach-result {
-    max-width: 750px;
-    margin: 0 auto;
-}
-
-.breach-result h4 {
-    font-size: 18px;
-    font-weight: 750;
-    line-height: 1.4;
-    margin: 0 0 12px;
-}
-
-.breach p {
-    color: #888;
-    font-size: 14px;
-    line-height: 1.75;
-
-    margin: 0 auto;
-    max-width: 700px;
-}
-
-.breach-result strong {
-    font-weight: 800;
-    color: inherit;
-}
-
-.breach-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-
-    padding: 10px 17px;
+    padding: 15px 20px;
 
     border: 1px solid rgba(229, 9, 20, 0.3);
-    border-radius: 10px;
+    border-radius: 12px;
 
     background: rgba(229, 9, 20, 0.08);
     color: #ff5555;
 
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
+    letter-spacing: 0.3px;
 
     cursor: pointer;
 
@@ -759,7 +696,11 @@ label {
         transform 0.2s ease;
 }
 
-.breach-button:hover:not(:disabled) {
+.breach-trigger-icon {
+    font-size: 15px;
+}
+
+.breach-trigger-button:hover:not(:disabled) {
     background: rgba(229, 9, 20, 0.16);
     border-color: rgba(229, 9, 20, 0.5);
     color: #ff7777;
@@ -767,71 +708,10 @@ label {
     transform: translateY(-1px);
 }
 
-.breach-button:disabled {
+.breach-trigger-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
-}
-
-
-/* =========================
-   BREACH FOUND
-========================= */
-
-.breach.danger {
-    border-color: rgba(229, 9, 20, 0.3);
-    background: rgba(229, 9, 20, 0.045);
-}
-
-.breach.danger .breach-icon {
-    display: flex;
-    background: rgba(229, 9, 20, 0.1);
-}
-
-.breach.danger h3,
-.breach.danger .breach-result h4 {
-    color: #ff5555;
-}
-
-
-/* =========================
-   PASSWORD NOT FOUND
-========================= */
-
-.breach.safe {
-    border-color: rgba(0, 210, 106, 0.22);
-    background: rgba(0, 210, 106, 0.035);
-}
-
-.breach.safe .breach-icon {
-    display: flex;
-
-    background: rgba(0, 210, 106, 0.1);
-
-    color: #00d26a;
-}
-
-.breach.safe h3,
-.breach.safe .breach-result h4 {
-    color: #00c968;
-}
-
-
-/* =========================
-   ERROR
-========================= */
-
-.breach.error {
-    border-color: rgba(255, 140, 0, 0.25);
-    background: rgba(255, 140, 0, 0.035);
-}
-
-.breach.error .breach-icon {
-    display: none;
-}
-
-.breach.error .breach-result h4 {
-    color: #ff9a3d;
 }
 
 
@@ -841,26 +721,9 @@ label {
 
 @media (max-width: 600px) {
 
-    .breach {
-        padding: 70px 16px 22px;
-    }
-
-    .breach h3 {
-        font-size: 16px;
-    }
-
-    .breach-result h4 {
-        font-size: 17px;
-    }
-
-    .breach p {
+    .breach-trigger-button {
+        padding: 14px 16px;
         font-size: 13px;
-        line-height: 1.7;
-    }
-
-    .breach-button {
-         top: 18px;
-        right: 18px;
     }
 
 }
@@ -1228,20 +1091,8 @@ body.light .theme-button {
     background: rgba(0, 0, 0, 0.04);
 }
 
-body.light .breach-button {
+body.light .breach-trigger-button {
     background: rgba(229, 9, 20, 0.05);
-}
-
-body.light .breach.safe .breach-button {
-    background: rgba(0, 160, 80, 0.06);
-}
-
-body.light .breach {
-    background: rgba(255, 100, 0, 0.05);
-}
-
-body.light .breach p {
-    color: #777;
 }
 
 
@@ -1500,6 +1351,140 @@ body.light .breach p {
 
 
 /* =========================
+   BREACH RESULT
+   (sits under the button, inside the card)
+========================= */
+
+.breach-result {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    margin-top: 14px;
+    padding: 16px 18px;
+
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+.breach-result-icon {
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    font-size: 16px;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.breach-result-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.breach-result-text h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.breach-result-text p {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.breach-result-text p strong {
+    font-weight: 800;
+    color: inherit;
+}
+
+.breach-result.checking {
+    border-color: rgba(255, 120, 0, 0.3);
+    background: rgba(255, 120, 0, 0.05);
+}
+
+.breach-result.checking .breach-result-icon {
+    background: rgba(255, 120, 0, 0.12);
+    border-color: rgba(255, 120, 0, 0.3);
+    color: #ff8c00;
+}
+
+.breach-result.danger {
+    border-color: rgba(229, 9, 20, 0.5);
+    background: rgba(229, 9, 20, 0.1);
+}
+
+.breach-result.danger .breach-result-icon {
+    background: rgba(229, 9, 20, 0.18);
+    border-color: rgba(229, 9, 20, 0.4);
+    color: #ff5555;
+}
+
+.breach-result.danger .breach-result-text h4 {
+    color: #ff5555;
+}
+
+.breach-result.safe {
+    border-color: rgba(0, 210, 106, 0.45);
+    background: rgba(0, 210, 106, 0.09);
+}
+
+.breach-result.safe .breach-result-icon {
+    background: rgba(0, 210, 106, 0.16);
+    border-color: rgba(0, 210, 106, 0.35);
+    color: #00d26a;
+}
+
+.breach-result.safe .breach-result-text h4 {
+    color: #00c968;
+}
+
+.breach-result.error {
+    border-color: rgba(255, 140, 0, 0.45);
+    background: rgba(255, 140, 0, 0.08);
+}
+
+.breach-result.error .breach-result-icon {
+    background: rgba(255, 140, 0, 0.15);
+    border-color: rgba(255, 140, 0, 0.35);
+    color: #ff9a3d;
+}
+
+.breach-result.error .breach-result-text h4 {
+    color: #ff9a3d;
+}
+
+
+@media (max-width: 600px) {
+
+    .breach-result {
+        padding: 14px;
+    }
+
+}
+
+
+/* =========================
    SECURITY BANNER
 ========================= */
 
@@ -1713,10 +1698,10 @@ body.light .info-box:hover {
 
 .history-sidebar {
     position: fixed;
-    top: 78px;
+    top: 0px;
     left: 0;
     width: 340px;
-    height: calc(100vh - 78px);
+    height: 100vh ;
 
     padding: 28px 20px 20px;
 

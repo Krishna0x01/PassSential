@@ -291,37 +291,48 @@
 
 
             <!-- =========================
-                 BREACH DETECTION
+                 BREACH CHECK BUTTON
             ========================= -->
 
-<div class="breach" id="breachSection">
+            <div class="breach-trigger">
 
-    <div class="breach-icon" id="breachIcon"></div>
+                <button
+                    type="button"
+                    id="breachButton"
+                    class="breach-trigger-button">
 
-    <div class="breach-content">
+                    <span class="breach-trigger-icon">🛡</span>
+                    <span id="breachButtonLabel">Check for Breach</span>
 
-        <h3>Breach Detection</h3>
+                </button>
 
-        <div class="breach-result" id="breachResult">
-            <h4 id="breachTitle"></h4>
+            </div>
 
-            <p id="breachMessage">
-                Check whether this password has appeared in
-                known data breaches.
-            </p>
 
-        </div>
+            <!-- =========================
+                 BREACH RESULT
+            ========================= -->
 
-    </div>
+            <div class="breach-result" id="breachSection">
 
-    <button
-        type="button"
-        id="breachButton"
-        class="breach-button">
-        Check for Breach
-    </button>
+                <div class="breach-result-icon" id="breachIcon">
+                    🔍
+                </div>
 
-</div>
+                <div class="breach-result-text">
+
+                    <h4 id="breachTitle">
+                        Breach Detection
+                    </h4>
+
+                    <p id="breachMessage">
+                        Check whether this password has appeared in
+                        known data breaches.
+                    </p>
+
+                </div>
+
+            </div>
 
 
         </section>

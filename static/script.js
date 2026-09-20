@@ -20,6 +20,8 @@ const breachMessage = document.getElementById("breachMessage");
 
 const breachButton = document.getElementById("breachButton");
 
+const breachButtonLabel = document.getElementById("breachButtonLabel");
+
 
 /* =========================
    SHOW / HIDE PASSWORD
@@ -60,7 +62,7 @@ passwordInput.addEventListener("input", async function () {
 
     resetBreach();
 
-    if (password.length === 0) {
+    if (password.trim().length === 0) {
         lastCheckedPassword = "";
         resetChecker();
         return;
@@ -148,13 +150,13 @@ breachButton.addEventListener("click", async function () {
     const password = passwordInput.value;
 
 
-    /* No password entered */
+    /* No password entered (or only whitespace) */
 
-    if (!password) {
+    if (!password || password.trim().length === 0) {
 
-        breachSection.className = "breach error";
+        breachSection.className = "breach-result error";
 
-        breachIcon.textContent = "";
+        breachIcon.textContent = "⚠";
 
         breachTitle.textContent = "Enter a password to check.";
 
@@ -170,12 +172,12 @@ breachButton.addEventListener("click", async function () {
 
     breachButton.disabled = true;
 
-    breachButton.textContent = "Checking...";
+    breachButtonLabel.textContent = "Checking...";
 
 
-    breachSection.className = "breach";
+    breachSection.className = "breach-result checking";
 
-    breachIcon.textContent = "";
+    breachIcon.textContent = "⏳";
 
     breachTitle.textContent = "Checking breach data...";
 
@@ -220,7 +222,7 @@ breachButton.addEventListener("click", async function () {
 
         if (data.breached) {
 
-            breachSection.className = "breach danger";
+            breachSection.className = "breach-result danger";
 
             breachIcon.textContent = "⚠";
 
@@ -240,7 +242,7 @@ breachButton.addEventListener("click", async function () {
 
         else {
 
-            breachSection.className = "breach safe";
+            breachSection.className = "breach-result safe";
 
             breachIcon.textContent = "✓";
 
@@ -258,9 +260,9 @@ breachButton.addEventListener("click", async function () {
         console.error("Breach check error:", error);
 
 
-        breachSection.className = "breach error";
+        breachSection.className = "breach-result error";
 
-        breachIcon.textContent = "";
+        breachIcon.textContent = "⚠";
 
         breachTitle.textContent = "Breach check unavailable.";
 
@@ -276,7 +278,7 @@ breachButton.addEventListener("click", async function () {
 
         breachButton.disabled = false;
 
-        breachButton.textContent = "Check for Breach";
+        breachButtonLabel.textContent = "Check for Breach";
 
     }
 
@@ -289,19 +291,19 @@ breachButton.addEventListener("click", async function () {
 
 function resetBreach() {
 
-    breachSection.className = "breach";
+    breachSection.className = "breach-result";
 
-    /* No warning by default */
-    breachIcon.textContent = "";
+    /* Default icon */
+    breachIcon.textContent = "🔍";
 
-    breachTitle.textContent = "";
+    breachTitle.textContent = "Breach Detection";
 
     breachMessage.textContent =
         "Check whether this password has appeared in known data breaches.";
 
     breachButton.disabled = false;
 
-    breachButton.textContent = "Check for Breach";
+    breachButtonLabel.textContent = "Check for Breach";
 
 }
 
@@ -589,7 +591,7 @@ historyOverlay.addEventListener("click", closeHistorySidebar);
 
 function addToHistory(password, strength, crackTimeValue) {
 
-    if (!password) {
+    if (!password || password.trim().length === 0) {
         return;
     }
 
@@ -793,7 +795,7 @@ passwordInput.addEventListener("input", function () {
     const password = passwordInput.value;
 
 
-    if (!password) {
+    if (!password || password.trim().length === 0) {
 
         return;
 
